@@ -1,0 +1,46 @@
+{
+  "_meta": {
+    "sources": [
+      "loopback/common/models",
+      "loopback/server/models",
+      "../common/models",
+      "./models"
+    ],
+    "mixins": [
+      "loopback/common/mixins",
+      "loopback/server/mixins",
+      "../common/mixins",
+      "./mixins"
+    ]
+  },
+  "User": {
+    "dataSource": "paciente360"
+  },
+  "AccessToken": {
+    "dataSource": "paciente360",
+    "public": false
+  },
+  "ACL": {
+    "dataSource": "paciente360",
+    "public": false
+  },
+  "RoleMapping": {
+    "dataSource": "paciente360",
+    "public": false,
+    "options": {
+      "strictObjectIDCoercion": true
+    }
+  },
+  "Role": {
+    "dataSource": "paciente360",
+    "public": false
+  },
+  "profissao": {
+    "dataSource": "paciente360",
+    "public": true
+  },
+  "pessoa": {
+    "dataSource": "paciente360",
+    "public": true
+  }
+}

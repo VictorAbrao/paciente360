@@ -1,0 +1,144 @@
+<div ng-controller="PessoaController as ctrl">
+  <div class="flex-container">
+    <h2>Pessoas Cadastradas</h2>
+
+    <button class="btn btn-success" ng-click="showAddPessoaModal()">
+      + Adicionar
+    </button>
+  </div>
+
+  <table class="table table-striped">
+    <thead>
+      <tr>
+        <th>Nome</th>
+        <th>Departamento</th>
+        <th>Telefone</th>
+        <th>Data de Nascimento</th>
+        <th>CPF</th>
+        <th>Observações</th>
+        <th class="thActions">Ações</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr ng-repeat="pessoa in pessoas">
+        <td>{{ pessoa.pes_nome }}</td>
+        <td>{{ pessoa.profissao.prof_nome }}</td>
+        <!-- Assumindo que prof_id corresponde a Departamento -->
+        <td>{{ pessoa.pes_telefone }}</td>
+        <td>{{ pessoa.pes_data_nascimento | date:'dd/MM/yyyy' }}</td>
+        <!-- Formatação de data -->
+        <td>{{ pessoa.pes_cpf }}</td>
+        <td>{{ pessoa.pes_observacoes }}</td>
+        <td class="tdActions col-3">
+          <button class="btn btn-primary btn-sm" ng-click="editPessoa(pessoa)">
+            ✏️ Editar
+          </button>
+          <button
+            class="btn btn-danger btn-sm"
+            ng-click="confirmDeletePessoa(pessoa.pes_id)"
+          >
+            🗑️ Excluir
+          </button>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+
+  <!-- Modal for adding new pessoa -->
+  <div
+    class="modal fade"
+    id="addPessoaModal"
+    tabindex="-1"
+    role="dialog"
+    aria-labelledby="addPessoaModalLabel"
+    aria-hidden="true"
+  >
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="addPessoaModalLabel">
+            Adicionar nova pessoa
+          </h5>
+          <button
+            type="button"
+            class="close"
+            data-dismiss="modal"
+            aria-label="Close"
+          >
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+          <form novalidate name="pessoaForm">
+            <div class="form-group">
+              <label for="nome">Nome*</label>
+              <input
+                type="text"
+                class="form-control"
+                id="nome"
+                ng-model="newPessoa.pes_nome"
+                required
+              />
+            </div>
+            <div class="form-group">
+              <label for="data_nascimento">Data de Nascimento*</label>
+              <input
+                type="text"
+                class="form-control"
+                id="data_nascimento"
+                ui-date-mask="DD/MM/YYYY"
+                ng-model="newPessoa.pes_data_nascimento"
+                required
+              />
+            </div>
+            <div class="form-group">
+              <label for="cpf">CPF*</label>
+              <input
+                type="text"
+                class="form-control"
+                id="cpf"
+                ng-model="newPessoa.pes_cpf"
+                ui-br-cpf-mask
+                required
+              />
+            </div>
+            <div class="form-group">
+              <label for="telefone">Telefone</label>
+              <input
+                type="text"
+                class="form-control"
+                id="telefone"
+                ng-model="newPessoa.pes_telefone"
+              />
+            </div>
+            <div class="form-group">
+              <label for="prof_id">ID do Departamento*</label>
+              <input
+                type="number"
+                class="form-control"
+                id="prof_id"
+                ng-model="newPessoa.prof_id"
+                required
+              />
+            </div>
+            <div class="form-group">
+              <label for="observacoes">Observações</label>
+              <textarea
+                class="form-control"
+                id="observacoes"
+                ng-model="newPessoa.pes_observacoes"
+              ></textarea>
+            </div>
+            <button
+              type="button"
+              class="btn btn-primary"
+              ng-click="savePessoa()"
+            >
+              Salvar
+            </button>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

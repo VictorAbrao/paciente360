@@ -1,0 +1,11 @@
+{
+  "paciente360": {
+    "host": "localhost",
+    "port": 5432,
+    "database": "paciente360",
+    "password": "vhla0512",
+    "name": "paciente360",
+    "connector": "postgresql",
+    "user": "postgres"
+  }
+}

@@ -1,0 +1,18 @@
+<div class="login-container">
+  <h1>{{isRegistering ? 'Cadastrar' : 'Login'}}</h1>
+  <form ng-submit="isRegistering ? register() : login()">
+    <div class="form-group" ng-if="isRegistering">
+      <input type="text" ng-model="user.username" placeholder="Username" required class="form-control"/>
+    </div>
+    <div class="form-group">
+      <input type="email" ng-model="user.email" placeholder="Email" required class="form-control"/>
+    </div>
+    <div class="form-group">
+      <input type="password" ng-model="user.password" placeholder="Password" required class="form-control"/>
+    </div>
+    <div class="form-group">
+      <button type="submit" class="btn btn-primary">{{isRegistering ? 'Cadastrar' : 'Login'}}</button>
+      <p href="#" class="forgot-password" ng-click="toggleRegister()">{{isRegistering ? 'Login existente' : 'Cadastrar novo usuário'}}</p>
+    </div>
+  </form>
+</div>

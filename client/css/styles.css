@@ -1,0 +1,147 @@
+
+.login-container {
+  background-color: #333;
+  padding: 40px;
+  border-radius: 5px;
+  width: 300px;
+  margin: 100px auto;
+  color: white;
+}
+
+
+.login-container h1 {
+  text-align: center;
+  margin-bottom: 20px;
+}
+
+
+.login-container input {
+  margin-bottom: 10px;
+  border: 1px solid #ddd;
+  border-radius: 2px;
+  padding: 10px;
+  width: 100%;
+  box-sizing: border-box;
+}
+
+
+.login-container .btn-primary {
+  width: 100%;
+  padding: 10px;
+  border: none;
+  border-radius: 2px;
+  background-color: #007bff;
+  color: white;
+}
+
+
+.login-container .forgot-password {
+  display: block;
+  text-align: center;
+  margin-top: 10px;
+  color: #ddd;
+}
+
+
+.login-container .btn-google,
+.login-container .btn-outlook,
+.login-container .btn-apple {
+  width: 30px;
+  height: 30px;
+  border-radius: 50%;
+  margin-right: 5px;
+  border: none;
+  color: white;
+  padding: 0;
+  display: inline-block;
+}
+
+.login-container .btn-google {
+  background-color: #dd4b39;
+} /* Google color */
+.login-container .btn-outlook {
+  background-color: #0072c6;
+} /* Outlook color */
+.login-container .btn-apple {
+  background-color: #000;
+} /* Apple color */
+
+/* Texto abaixo dos botões sociais */
+.login-container .social-login p {
+  text-align: center;
+  margin-top: 20px;
+}
+
+/* Contêiner dos botões sociais */
+.login-container .social-login {
+  text-align: center;
+  margin-top: 10px;
+}
+
+
+body {
+  background-color: #f4f4f4;
+}
+
+table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+table,
+th,
+td {
+  border: 1px solid #ddd;
+}
+
+th,
+td {
+  padding: 8px;
+  text-align: left;
+}
+
+th {
+  background-color: #f2f2f2;
+}
+
+button {
+  margin-left: 5px;
+}
+
+.add-new-button {
+  background-color: #4caf50; 
+  border: none;
+  color: white;
+  padding: 10px 20px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 16px;
+  margin: 4px 2px;
+  cursor: pointer;
+  border-radius: 8px;
+}
+
+.add-new-button:hover {
+  background-color: #45a049;
+}
+
+.navbar {
+  margin-bottom: 60px;
+}
+
+.flex-container {
+  padding: 15px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center; 
+}
+
+
+.tdActions{
+    text-align: center;
+}
+
+.thActions{
+    text-align: center;
+}
