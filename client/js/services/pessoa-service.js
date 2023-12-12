@@ -11,16 +11,18 @@ angular.module("app").factory("PessoaService", [
 
     return {
       getPessoas: function () {
-        var filter = encodeURIComponent(JSON.stringify({
-          include: {
-            relation: "profissao",
-            scope: {
-              fields: ["prof_nome"]
-            }
-          }
-        }));
+        var filter = encodeURIComponent(
+          JSON.stringify({
+            include: {
+              relation: "profissao",
+              scope: {
+                fields: ["prof_nome"],
+              },
+            },
+          })
+        );
 
-        return $http.get(baseUrl + '?filter=' + filter);
+        return $http.get(baseUrl + "?filter=" + filter);
       },
       createPessoa: function (pessoa) {
         return $http.post(baseUrl, pessoa);
@@ -30,6 +32,9 @@ angular.module("app").factory("PessoaService", [
       },
       deletePessoa: function (id) {
         return $http.delete(baseUrl + "/" + id);
+      },
+      getProfissoes: function () {
+        return $http.get("/api/profissoes");
       },
     };
   },

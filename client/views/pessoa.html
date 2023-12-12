@@ -11,7 +11,7 @@
     <thead>
       <tr>
         <th>Nome</th>
-        <th>Departamento</th>
+        <th>Profissão</th>
         <th>Telefone</th>
         <th>Data de Nascimento</th>
         <th>CPF</th>
@@ -112,14 +112,15 @@
               />
             </div>
             <div class="form-group">
-              <label for="prof_id">ID do Departamento*</label>
-              <input
-                type="number"
-                class="form-control"
-                id="prof_id"
+              <label for="prof_id">ID da profissão*</label>
+              <select
+                id="profissao"
                 ng-model="newPessoa.prof_id"
-                required
-              />
+                class="form-control"
+                ng-options="profissao.prof_id as profissao.prof_nome for profissao in profissoes"
+              >
+                <option value="">Selecione uma Profissão</option>
+              </select>
             </div>
             <div class="form-group">
               <label for="observacoes">Observações</label>

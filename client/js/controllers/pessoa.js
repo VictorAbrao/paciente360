@@ -4,8 +4,10 @@ angular.module("app").controller("PessoaController", [
   "$timeout",
   function ($scope, PessoaService, $timeout) {
     $scope.pessoas = [];
-    $scope.newPessoa = {};
+    $scope.newPessoa = { prof_id: null };
+    $scope.profissoes = [];
     $scope.selectedPessoa = null;
+
     function formatDateToInput(dateString) {
       if (!dateString) {
         return null;
@@ -13,10 +15,10 @@ angular.module("app").controller("PessoaController", [
 
       var date = new Date(dateString);
       var year = date.getFullYear();
-      var month = ("0" + (date.getMonth() + 1)).slice(-2); 
-      var day = ("0" + date.getDate()).slice(-2); 
+      var month = ("0" + (date.getMonth() + 1)).slice(-2);
+      var day = ("0" + date.getDate()).slice(-2);
 
-      return day + "/" + month + "/" + year; 
+      return day + "/" + month + "/" + year;
     }
 
     function isValidCPF(cpf) {
@@ -24,7 +26,7 @@ angular.module("app").controller("PessoaController", [
         return false;
       }
 
-      cpf = cpf.replace(/[^\d]+/g, ""); 
+      cpf = cpf.replace(/[^\d]+/g, "");
 
       if (
         cpf.length !== 11 ||
@@ -76,7 +78,10 @@ angular.module("app").controller("PessoaController", [
       return true;
     }
 
-    
+    PessoaService.getProfissoes().then(function (response) {
+      $scope.profissoes = response.data;
+    });
+
     $scope.loadPessoas = function () {
       PessoaService.getPessoas().then(
         function (response) {
@@ -88,14 +93,13 @@ angular.module("app").controller("PessoaController", [
       );
     };
 
-    
     $scope.showAddPessoaModal = function () {
       $scope.newPessoa = {};
       $("#addPessoaModal").modal("show");
     };
 
-    
     $scope.addPessoa = function () {
+      console.log("Enviando pessoa:", $scope.newPessoa);
       if (
         isValidCPF($scope.newPessoa.pes_cpf) &&
         $scope.newPessoa.pes_cpf != ""
@@ -130,7 +134,6 @@ angular.module("app").controller("PessoaController", [
       }
     };
 
-    
     $scope.editPessoa = function (pessoa) {
       $scope.newPessoa = angular.copy(pessoa);
       $scope.newPessoa.pes_data_nascimento = formatDateToInput(
@@ -141,9 +144,10 @@ angular.module("app").controller("PessoaController", [
         $("#addPessoaModal").modal("show");
       });
     };
-    
+
     $scope.updatePessoa = function () {
       $scope.selectedPessoa = $scope.newPessoa;
+      $scope.selectedPessoa.profissao.prof_id = $scope.newPessoa.prof_id; 
       PessoaService.updatePessoa($scope.selectedPessoa).then(
         function (response) {
           for (var i = 0; i < $scope.pessoas.length; i++) {
@@ -154,6 +158,7 @@ angular.module("app").controller("PessoaController", [
           }
           $scope.selectedPessoa = null;
           $("#addPessoaModal").modal("hide");
+          $scope.loadPessoas();
         },
         function (error) {
           console.error("Error updating pessoa:", error);
@@ -164,10 +169,8 @@ angular.module("app").controller("PessoaController", [
     $scope.savePessoa = function () {
       console.log("teste", $scope.newPessoa);
       if ($scope.newPessoa.pes_id) {
-        
         $scope.updatePessoa();
       } else {
-        
         $scope.addPessoa();
       }
     };
@@ -186,7 +189,6 @@ angular.module("app").controller("PessoaController", [
       });
     };
 
-    
     $scope.deletePessoa = function (id) {
       PessoaService.deletePessoa(id).then(
         function (response) {
@@ -200,7 +202,6 @@ angular.module("app").controller("PessoaController", [
       );
     };
 
-    
     $scope.loadPessoas();
   },
 ]);
